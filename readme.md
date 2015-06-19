@@ -8,6 +8,8 @@ Official documentation for Forms & Html for The Laravel/Lumen Framework can be f
 
 # Configuration 
 
+On your `bootstrap/app.php`:
+
 ```php
 $app->register('Collective\Html\HtmlServiceProvider');
 

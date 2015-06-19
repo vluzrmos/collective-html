@@ -1,5 +1,7 @@
 # Forms & HTML
 
+[![Latest Stable Version](https://poser.pugx.org/vluzrmos/collective-html/v/stable)](https://packagist.org/packages/vluzrmos/collective-html) [![Total Downloads](https://poser.pugx.org/vluzrmos/collective-html/downloads)](https://packagist.org/packages/vluzrmos/collective-html) [![Latest Unstable Version](https://poser.pugx.org/vluzrmos/collective-html/v/unstable)](https://packagist.org/packages/vluzrmos/collective-html) [![License](https://poser.pugx.org/vluzrmos/collective-html/license)](https://packagist.org/packages/vluzrmos/collective-html)
+
 Official documentation for Forms & Html for The Laravel/Lumen Framework can be found at the [LaravelCollective](http://laravelcollective.com/docs/master/html) website.
 
 # Instalation on Lumen

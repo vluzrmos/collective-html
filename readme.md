@@ -4,12 +4,11 @@ Official documentation for Forms & Html for The Laravel/Lumen Framework can be f
 
 # Instalation on Lumen
 
-composer require vluzrmos/collective-html
+    composer require vluzrmos/collective-html
 
 # Configuration 
 
-```php 
-
+```php
 $app->register('Collective\Html\HtmlServiceProvider');
 
 class_alias('Collective\Html\HtmlFacade', 'Html');

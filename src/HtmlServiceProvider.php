@@ -2,6 +2,7 @@
 
 namespace Collective\Html;
 
+use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
 
 class HtmlServiceProvider extends ServiceProvider
@@ -23,9 +24,6 @@ class HtmlServiceProvider extends ServiceProvider
         $this->registerHtmlBuilder();
 
         $this->registerFormBuilder();
-
-        $this->app->alias('html', 'Collective\Html\HtmlBuilder');
-        $this->app->alias('form', 'Collective\Html\FormBuilder');
     }
 
     /**
@@ -35,9 +33,11 @@ class HtmlServiceProvider extends ServiceProvider
      */
     protected function registerHtmlBuilder()
     {
-        $this->app->bindShared('html', function ($app) {
+        $this->app->singleton('html', function ($app) {
             return new HtmlBuilder($app['url']);
         });
+
+		$this->app->alias('html', 'Collective\Html\HtmlBuilder');
     }
 
     /**
@@ -47,11 +47,18 @@ class HtmlServiceProvider extends ServiceProvider
      */
     protected function registerFormBuilder()
     {
-        $this->app->bindShared('form', function ($app) {
-            $form = new FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
+        $this->app->singleton('form', function ($app) {
+			/** @var Store $session */
+			$session = $app['session.store'];
 
-            return $form->setSessionStore($app['session.store']);
+			$form = new FormBuilder($app['html'], $app['url'], $session->token());
+
+			$form->setSessionStore($session);
+
+            return $form;
         });
+
+		$this->app->alias('form', 'Collective\Html\FormBuilder');
     }
 
     /**

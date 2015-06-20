@@ -8,7 +8,7 @@ use Mockery as m;
 
 class FormBuilderTest extends PHPUnit_Framework_TestCase
 {
-    /**
+  /**
    * Setup the test environment.
    */
   public function setUp()

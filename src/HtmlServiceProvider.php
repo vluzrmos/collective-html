@@ -37,7 +37,7 @@ class HtmlServiceProvider extends ServiceProvider
             return new HtmlBuilder($app['url']);
         });
 
-		$this->app->alias('html', 'Collective\Html\HtmlBuilder');
+        $this->app->alias('html', 'Collective\Html\HtmlBuilder');
     }
 
     /**
@@ -48,17 +48,17 @@ class HtmlServiceProvider extends ServiceProvider
     protected function registerFormBuilder()
     {
         $this->app->singleton('form', function ($app) {
-			/** @var Store $session */
-			$session = $app['session.store'];
+            /** @var Store $session */
+            $session = $app['session.store'];
 
-			$form = new FormBuilder($app['html'], $app['url'], $session->token());
+            $form = new FormBuilder($app['html'], $app['url'], $session->token());
 
-			$form->setSessionStore($session);
+            $form->setSessionStore($session);
 
             return $form;
         });
 
-		$this->app->alias('form', 'Collective\Html\FormBuilder');
+        $this->app->alias('form', 'Collective\Html\FormBuilder');
     }
 
     /**

@@ -1,7 +1,6 @@
 preset: psr2
 
 enabled:
-	- unused_use
 	- blankline_after_open_tag
     - concat_without_spaces
     - double_arrow_multiline_whitespaces

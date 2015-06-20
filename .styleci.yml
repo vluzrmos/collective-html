@@ -1,7 +1,6 @@
 preset: psr2
 
 enabled:
-	- phpdoc_params
 	- unused_use
 	- blankline_after_open_tag
     - concat_without_spaces

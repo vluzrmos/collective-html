@@ -5,63 +5,64 @@ use Mockery as m;
 use Illuminate\Http\Request;
 use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
-use Illuminate\Routing\UrlGenerator;
-use Illuminate\Routing\RouteCollection;
+use Laravel\Lumen\Routing\UrlGenerator;
 
-class HtmlBuilderTest extends PHPUnit_Framework_TestCase {
+//use Illuminate\Routing\RouteCollection;
 
-	/**
-	 * Setup the test environment.
-	 */
-	public function setUp()
-	{
-		$this->urlGenerator = new UrlGenerator(new RouteCollection, Request::create('/foo', 'GET'));
-		$this->htmlBuilder  = new HtmlBuilder($this->urlGenerator);
-	}
+class HtmlBuilderTest extends PHPUnit_Framework_TestCase
+{
+    /**
+     * Setup the test environment.
+     */
+    public function setUp()
+    {
+        $this->app = new Laravel\Lumen\Application();
 
-	/**
-	 * Destroy the test environment.
-	 */
-	public function tearDown()
-	{
-		m::close();
-	}
+        $this->urlGenerator = $this->app['url'];//new UrlGenerator($app);//new RouteCollection, Request::create('/foo', 'GET'));
+        $this->htmlBuilder  = new HtmlBuilder($this->urlGenerator);
+    }
 
-	public function testDl()
-	{
-		$list = [
-			'foo' => 'bar',
-			'bing' => 'baz'
-		];
+    /**
+     * Destroy the test environment.
+     */
+    public function tearDown()
+    {
+        m::close();
+    }
 
-		$attributes = ['class' => 'example'];
+    public function testDl()
+    {
+        $list = [
+            'foo' => 'bar',
+            'bing' => 'baz'
+        ];
 
-		$result = $this->htmlBuilder->dl($list, $attributes);
+        $attributes = ['class' => 'example'];
 
-		$this->assertEquals('<dl class="example"><dt>foo</dt><dd>bar</dd><dt>bing</dt><dd>baz</dd></dl>', $result);
-	}
+        $result = $this->htmlBuilder->dl($list, $attributes);
 
-	public function testMeta()
-	{
-		$result = $this->htmlBuilder->meta('description', 'Lorem ipsum dolor sit amet.');
+        $this->assertEquals('<dl class="example"><dt>foo</dt><dd>bar</dd><dt>bing</dt><dd>baz</dd></dl>', $result);
+    }
 
-		$this->assertEquals('<meta name="description" content="Lorem ipsum dolor sit amet.">'.PHP_EOL, $result);
-	}
+    public function testMeta()
+    {
+        $result = $this->htmlBuilder->meta('description', 'Lorem ipsum dolor sit amet.');
 
-	public function testMetaOpenGraph()
-	{
-		$result = $this->htmlBuilder->meta(null, 'website', ['property' => 'og:type']);
+        $this->assertEquals('<meta name="description" content="Lorem ipsum dolor sit amet.">'.PHP_EOL, $result);
+    }
 
-		$this->assertEquals('<meta content="website" property="og:type">'.PHP_EOL, $result);
-	}
+    public function testMetaOpenGraph()
+    {
+        $result = $this->htmlBuilder->meta(null, 'website', ['property' => 'og:type']);
+
+        $this->assertEquals('<meta content="website" property="og:type">'.PHP_EOL, $result);
+    }
 
     public function testFavicon()
     {
-        $this->urlGenerator->forceRootUrl('http://foo.com');
-        $target = $this->urlGenerator->to('bar.ico');
+        $target = $this->urlGenerator->to('http://foo.com/bar.ico');
         $result = $this->htmlBuilder->favicon('http://foo.com/bar.ico');
 
         $this->assertEquals('<link rel="shortcut icon" type="image/x-icon" href="'.$target.'">' . PHP_EOL, $result);
     }
-
 }

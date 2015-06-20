@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Session\Store;
-use Mockery as m;
 use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
-use Laravel\Lumen\Routing\UrlGenerator;
 use Laravel\Lumen\Application;
+use Laravel\Lumen\Routing\UrlGenerator;
+use Mockery as m;
 
 class FormBuilderTest extends PHPUnit_Framework_TestCase
 {
@@ -19,7 +18,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
       $this->urlGenerator = $app->make('url');
 
       $this->htmlBuilder = new HtmlBuilder($this->urlGenerator);
-      $this->formBuilder =  new FormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc');
+      $this->formBuilder = new FormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc');
 
       $this->baseUrl = $this->urlGenerator->to('http://localhost');
   }
@@ -32,15 +31,13 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
       m::close();
   }
 
-
     public function testOpeningForm()
     {
-        $form1 = $this->formBuilder->open(['url'=> "{$this->baseUrl}/foo", 'method' => 'GET']);
-        $form2 = $this->formBuilder->open(['url'=> "{$this->baseUrl}/foo", 'method' => 'POST', 'class' => 'form', 'id' => 'id-form']);
-        $form3 = $this->formBuilder->open(['url'=> "{$this->baseUrl}/foo", 'method' => 'GET', 'accept-charset' => 'UTF-16']);
-        $form4 = $this->formBuilder->open(['url'=> "{$this->baseUrl}/foo", 'method' => 'GET', 'accept-charset' => 'UTF-16', 'files' => true]);
-        $form5 = $this->formBuilder->open(['url'=> "{$this->baseUrl}/foo", 'method' => 'PUT']);
-
+        $form1 = $this->formBuilder->open(['url' => "{$this->baseUrl}/foo", 'method' => 'GET']);
+        $form2 = $this->formBuilder->open(['url' => "{$this->baseUrl}/foo", 'method' => 'POST', 'class' => 'form', 'id' => 'id-form']);
+        $form3 = $this->formBuilder->open(['url' => "{$this->baseUrl}/foo", 'method' => 'GET', 'accept-charset' => 'UTF-16']);
+        $form4 = $this->formBuilder->open(['url' => "{$this->baseUrl}/foo", 'method' => 'GET', 'accept-charset' => 'UTF-16', 'files' => true]);
+        $form5 = $this->formBuilder->open(['url' => "{$this->baseUrl}/foo", 'method' => 'PUT']);
 
         $this->assertEquals('<form method="GET" action="'.$this->baseUrl.'/foo" accept-charset="UTF-8">', $form1);
         $this->assertEquals('<form method="POST" action="'.$this->baseUrl.'/foo" accept-charset="UTF-8" class="form" id="id-form"><input name="_token" type="hidden" value="abc">', $form2);
@@ -49,12 +46,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<form method="POST" action="'.$this->baseUrl.'/foo" accept-charset="UTF-8"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="abc">', $form5);
     }
 
-
     public function testClosingForm()
     {
         $this->assertEquals('</form>', $this->formBuilder->close());
     }
-
 
     public function testFormLabel()
     {
@@ -64,7 +59,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<label for="foo">Foobar</label>', $form1);
         $this->assertEquals('<label for="foo" class="control-label">Foobar</label>', $form2);
     }
-
 
     public function testFormInput()
     {
@@ -77,7 +71,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input class="span2" name="foobar" type="date">', $form3);
     }
 
-
     public function testPasswordsNotFilled()
     {
         $this->formBuilder->setSessionStore($session = m::mock('Illuminate\Session\Store'));
@@ -89,7 +82,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="password" type="password" value="">', $form1);
     }
 
-
     public function testFilesNotFilled()
     {
         $this->formBuilder->setSessionStore($session = m::mock('Illuminate\Session\Store'));
@@ -100,7 +92,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('<input name="img" type="file">', $form);
     }
-
 
     public function testFormText()
     {
@@ -114,7 +105,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="foo" type="text" value="foobar">', $form3);
         $this->assertEquals('<input class="span2" name="foo" type="text">', $form4);
     }
-
 
     public function testFormTextRepopulation()
     {
@@ -139,18 +129,16 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($input1, $input2);
     }
 
-
     public function testFormRepopulationWithMixOfArraysAndObjects()
     {
-        $this->formBuilder->model(['user' => (object)['password' => 'apple']]);
+        $this->formBuilder->model(['user' => (object) ['password' => 'apple']]);
         $input = $this->formBuilder->text('user[password]');
         $this->assertEquals('<input name="user[password]" type="text" value="apple">', $input);
 
-        $this->formBuilder->model((object)['letters' => ['a', 'b', 'c']]);
+        $this->formBuilder->model((object) ['letters' => ['a', 'b', 'c']]);
         $input = $this->formBuilder->text('letters[1]');
         $this->assertEquals('<input name="letters[1]" type="text" value="b">', $input);
     }
-
 
     public function testFormPassword()
     {
@@ -160,7 +148,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="foo" type="password" value="">', $form1);
         $this->assertEquals('<input class="span2" name="foo" type="password" value="">', $form2);
     }
-
 
     public function testFormHidden()
     {
@@ -173,7 +160,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input class="span2" name="foo" type="hidden">', $form3);
     }
 
-
     public function testFormEmail()
     {
         $form1 = $this->formBuilder->email('foo');
@@ -184,7 +170,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="foo" type="email" value="foobar">', $form2);
         $this->assertEquals('<input class="span2" name="foo" type="email">', $form3);
     }
-
 
     public function testFormNumber()
     {
@@ -206,10 +191,9 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('<input name="foo" type="date">', $form1);
         $this->assertEquals('<input name="foo" type="date" value="2015-02-20">', $form2);
-        $this->assertEquals('<input name="foo" type="date" value="' . \Carbon\Carbon::now()->format('Y-m-d') . '">', $form3);
+        $this->assertEquals('<input name="foo" type="date" value="'.\Carbon\Carbon::now()->format('Y-m-d').'">', $form3);
         $this->assertEquals('<input class="span2" name="foo" type="date">', $form4);
     }
-
 
     public function testFormFile()
     {
@@ -219,7 +203,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="foo" type="file">', $form1);
         $this->assertEquals('<input class="span2" name="foo" type="file">', $form2);
     }
-
 
     public function testFormTextarea()
     {
@@ -234,7 +217,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<textarea name="foo" cols="60" rows="15"></textarea>', $form4);
     }
 
-
     public function testSelect()
     {
         $select = $this->formBuilder->select(
@@ -243,16 +225,12 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
     );
         $this->assertEquals($select, '<select name="size"><option value="L">Large</option><option value="S">Small</option></select>');
 
-
-
         $select = $this->formBuilder->select(
       'size',
       ['L' => 'Large', 'S' => 'Small'],
       'L'
     );
         $this->assertEquals($select, '<select name="size"><option value="L" selected="selected">Large</option><option value="S">Small</option></select>');
-
-
 
         $select = $this->formBuilder->select(
       'size',
@@ -261,8 +239,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
       ['class' => 'class-name', 'id' => 'select-id']
     );
         $this->assertEquals($select, '<select class="class-name" id="select-id" name="size"><option value="L">Large</option><option value="S">Small</option></select>');
-
-
 
         $this->formBuilder->label('select-name-id');
         $select = $this->formBuilder->select(
@@ -273,7 +249,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
     );
         $this->assertEquals($select, '<select name="select-name" id="select-name-id"></select>');
     }
-
 
     public function testFormSelectRepopulation()
     {
@@ -294,7 +269,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($select, '<select name="size[key]"><option value="L">Large</option><option value="M">Medium</option><option value="S" selected="selected">Small</option></select>');
     }
 
-
     public function testFormSelectYear()
     {
         $select1 = $this->formBuilder->selectYear('year', 2000, 2020);
@@ -306,7 +280,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('<select name="year"><option value="2000" selected="selected">2000</option><option value="2001">2001</option>', $select3);
     }
 
-
     public function testFormSelectRange()
     {
         $range = $this->formBuilder->selectRange('dob', 1900, 2013);
@@ -314,7 +287,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('<select name="dob"><option value="1900">1900</option>', $range);
         $this->assertContains('<option value="2013">2013</option>', $range);
     }
-
 
     public function testFormSelectMonth()
     {
@@ -326,7 +298,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('<select name="month"><option value="1" selected="selected">January</option>', $month2);
         $this->assertContains('<select id="foo" name="month"><option value="1">January</option>', $month3);
     }
-
 
     public function testFormCheckbox()
     {
@@ -345,7 +316,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input checked="checked" name="foo" type="checkbox" value="foobar">', $form3);
         $this->assertEquals('<input class="span2" name="foo" type="checkbox" value="foobar">', $form4);
     }
-
 
     public function testFormCheckboxRepopulation()
     {
@@ -370,7 +340,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input checked="checked" name="multicheck[]" type="checkbox" value="3">', $check3);
     }
 
-
     public function testFormCheckboxWithoutSession()
     {
         $form1 = $this->formBuilder->checkbox('foo');
@@ -379,7 +348,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="foo" type="checkbox" value="1">', $form1);
         $this->assertEquals('<input checked="checked" name="foo" type="checkbox" value="foobar">', $form2);
     }
-
 
     public function testFormRadio()
     {
@@ -394,7 +362,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input class="span2" name="foo" type="radio" value="foobar">', $form4);
     }
 
-
     public function testFormRadioRepopulation()
     {
         $this->formBuilder->setSessionStore($session = m::mock('Illuminate\Session\Store'));
@@ -408,7 +375,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="radio" type="radio" value="2">', $radio2);
     }
 
-
     public function testFormSubmit()
     {
         $form1 = $this->formBuilder->submit('foo');
@@ -417,7 +383,6 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input type="submit" value="foo">', $form1);
         $this->assertEquals('<input class="span2" type="submit" value="foo">', $form2);
     }
-
 
     public function testFormButton()
     {
@@ -428,20 +393,18 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<button class="span2" type="button">foo</button>', $form2);
     }
 
-
     public function testResetInput()
     {
         $resetInput = $this->formBuilder->reset('foo');
         $this->assertEquals('<input type="reset" value="foo">', $resetInput);
     }
 
-
     public function testImageInput()
     {
         $url = 'http://laravel.com/';
         $image = $this->formBuilder->image($url);
 
-        $this->assertEquals('<input src="'. $url .'" type="image">', $image);
+        $this->assertEquals('<input src="'.$url.'" type="image">', $image);
     }
 
     protected function setModel(array $data, $object = true)
@@ -469,12 +432,10 @@ class FormBuilderModelStub
         }
     }
 
-
     public function __get($key)
     {
         return $this->data[$key];
     }
-
 
     public function __isset($key)
     {

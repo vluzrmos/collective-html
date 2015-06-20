@@ -2,8 +2,8 @@
 
 namespace Collective\Html;
 
-use Laravel\Lumen\Routing\UrlGenerator;
 use Illuminate\Support\Traits\Macroable;
+use Laravel\Lumen\Routing\UrlGenerator;
 
 class HtmlBuilder
 {
@@ -19,7 +19,7 @@ class HtmlBuilder
     /**
      * Create a new HTML builder instance.
      *
-     * @param  \Laravel\Lumen\Routing\UrlGenerator $url
+     * @param \Laravel\Lumen\Routing\UrlGenerator $url
      */
     public function __construct(UrlGenerator $url = null)
     {
@@ -29,7 +29,8 @@ class HtmlBuilder
     /**
      * Convert an HTML string to entities.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     public function entities($value)
@@ -40,7 +41,8 @@ class HtmlBuilder
     /**
      * Convert entities to HTML characters.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     public function decode($value)
@@ -51,9 +53,10 @@ class HtmlBuilder
     /**
      * Generate a link to a JavaScript file.
      *
-     * @param  string  $url
-     * @param  array   $attributes
-     * @param  bool    $secure
+     * @param string $url
+     * @param array  $attributes
+     * @param bool   $secure
+     *
      * @return string
      */
     public function script($url, $attributes = [], $secure = null)
@@ -66,9 +69,10 @@ class HtmlBuilder
     /**
      * Generate a link to a CSS file.
      *
-     * @param  string  $url
-     * @param  array   $attributes
-     * @param  bool    $secure
+     * @param string $url
+     * @param array  $attributes
+     * @param bool   $secure
+     *
      * @return string
      */
     public function style($url, $attributes = [], $secure = null)
@@ -85,10 +89,11 @@ class HtmlBuilder
     /**
      * Generate an HTML image element.
      *
-     * @param  string  $url
-     * @param  string  $alt
-     * @param  array   $attributes
-     * @param  bool    $secure
+     * @param string $url
+     * @param string $alt
+     * @param array  $attributes
+     * @param bool   $secure
+     *
      * @return string
      */
     public function image($url, $alt = null, $attributes = [], $secure = null)
@@ -97,13 +102,14 @@ class HtmlBuilder
 
         return '<img src="'.$this->url->asset($url, $secure).'"'.$this->attributes($attributes).'>';
     }
-    
+
     /**
      * Generate a link to a Favicon file.
      *
-     * @param  string  $url
-     * @param  array   $attributes
-     * @param  bool    $secure
+     * @param string $url
+     * @param array  $attributes
+     * @param bool   $secure
+     *
      * @return string
      */
     public function favicon($url, $attributes = [], $secure = null)
@@ -120,10 +126,11 @@ class HtmlBuilder
     /**
      * Generate a HTML link.
      *
-     * @param  string  $url
-     * @param  string  $title
-     * @param  array   $attributes
-     * @param  bool    $secure
+     * @param string $url
+     * @param string $title
+     * @param array  $attributes
+     * @param bool   $secure
+     *
      * @return string
      */
     public function link($url, $title = null, $attributes = [], $secure = null)
@@ -140,9 +147,10 @@ class HtmlBuilder
     /**
      * Generate a HTTPS HTML link.
      *
-     * @param  string  $url
-     * @param  string  $title
-     * @param  array   $attributes
+     * @param string $url
+     * @param string $title
+     * @param array  $attributes
+     *
      * @return string
      */
     public function secureLink($url, $title = null, $attributes = [])
@@ -153,10 +161,11 @@ class HtmlBuilder
     /**
      * Generate a HTML link to an asset.
      *
-     * @param  string  $url
-     * @param  string  $title
-     * @param  array   $attributes
-     * @param  bool    $secure
+     * @param string $url
+     * @param string $title
+     * @param array  $attributes
+     * @param bool   $secure
+     *
      * @return string
      */
     public function linkAsset($url, $title = null, $attributes = [], $secure = null)
@@ -169,9 +178,10 @@ class HtmlBuilder
     /**
      * Generate a HTTPS HTML link to an asset.
      *
-     * @param  string  $url
-     * @param  string  $title
-     * @param  array   $attributes
+     * @param string $url
+     * @param string $title
+     * @param array  $attributes
+     *
      * @return string
      */
     public function linkSecureAsset($url, $title = null, $attributes = [])
@@ -182,10 +192,11 @@ class HtmlBuilder
     /**
      * Generate a HTML link to a named route.
      *
-     * @param  string  $name
-     * @param  string  $title
-     * @param  array   $parameters
-     * @param  array   $attributes
+     * @param string $name
+     * @param string $title
+     * @param array  $parameters
+     * @param array  $attributes
+     *
      * @return string
      */
     public function linkRoute($name, $title = null, $parameters = [], $attributes = [])
@@ -196,10 +207,11 @@ class HtmlBuilder
     /**
      * Generate a HTML link to a controller action.
      *
-     * @param  string  $action
-     * @param  string  $title
-     * @param  array   $parameters
-     * @param  array   $attributes
+     * @param string $action
+     * @param string $title
+     * @param array  $parameters
+     * @param array  $attributes
+     *
      * @return string
      */
     public function linkAction($action, $title = null, $parameters = [], $attributes = [])
@@ -210,9 +222,10 @@ class HtmlBuilder
     /**
      * Generate a HTML link to an email address.
      *
-     * @param  string  $email
-     * @param  string  $title
-     * @param  array   $attributes
+     * @param string $email
+     * @param string $title
+     * @param array  $attributes
+     *
      * @return string
      */
     public function mailto($email, $title = null, $attributes = [])
@@ -221,7 +234,7 @@ class HtmlBuilder
 
         $title = $title ?: $email;
 
-        $email = $this->obfuscate('mailto:') . $email;
+        $email = $this->obfuscate('mailto:').$email;
 
         return '<a href="'.$email.'"'.$this->attributes($attributes).'>'.$this->entities($title).'</a>';
     }
@@ -229,7 +242,8 @@ class HtmlBuilder
     /**
      * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
      *
-     * @param  string  $email
+     * @param string $email
+     *
      * @return string
      */
     public function email($email)
@@ -240,8 +254,9 @@ class HtmlBuilder
     /**
      * Generate an ordered list of items.
      *
-     * @param  array   $list
-     * @param  array   $attributes
+     * @param array $list
+     * @param array $attributes
+     *
      * @return string
      */
     public function ol($list, $attributes = [])
@@ -252,8 +267,9 @@ class HtmlBuilder
     /**
      * Generate an un-ordered list of items.
      *
-     * @param  array   $list
-     * @param  array   $attributes
+     * @param array $list
+     * @param array $attributes
+     *
      * @return string
      */
     public function ul($list, $attributes = [])
@@ -264,8 +280,9 @@ class HtmlBuilder
     /**
      * Generate a description list of items.
      *
-     * @param  array   $list
-     * @param  array   $attributes
+     * @param array $list
+     * @param array $attributes
+     *
      * @return string
      */
     public function dl(array $list, array $attributes = [])
@@ -286,9 +303,10 @@ class HtmlBuilder
     /**
      * Create a listing HTML element.
      *
-     * @param  string  $type
-     * @param  array   $list
-     * @param  array   $attributes
+     * @param string $type
+     * @param array  $list
+     * @param array  $attributes
+     *
      * @return string
      */
     protected function listing($type, $list, $attributes = [])
@@ -314,9 +332,10 @@ class HtmlBuilder
     /**
      * Create the HTML for a listing element.
      *
-     * @param  mixed    $key
-     * @param  string  $type
-     * @param  string  $value
+     * @param mixed  $key
+     * @param string $type
+     * @param string $value
+     *
      * @return string
      */
     protected function listingElement($key, $type, $value)
@@ -331,9 +350,10 @@ class HtmlBuilder
     /**
      * Create the HTML for a nested listing attribute.
      *
-     * @param  mixed    $key
-     * @param  string  $type
-     * @param  string  $value
+     * @param mixed  $key
+     * @param string $type
+     * @param string $value
+     *
      * @return string
      */
     protected function nestedListing($key, $type, $value)
@@ -348,7 +368,8 @@ class HtmlBuilder
     /**
      * Build an HTML attribute string from an array.
      *
-     * @param  array  $attributes
+     * @param array $attributes
+     *
      * @return string
      */
     public function attributes($attributes)
@@ -358,7 +379,7 @@ class HtmlBuilder
         foreach ((array) $attributes as $key => $value) {
             $element = $this->attributeElement($key, $value);
 
-            if (! is_null($element)) {
+            if (!is_null($element)) {
                 $html[] = $element;
             }
         }
@@ -369,8 +390,9 @@ class HtmlBuilder
     /**
      * Build a single attribute element.
      *
-     * @param  string  $key
-     * @param  string  $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     protected function attributeElement($key, $value)
@@ -382,7 +404,7 @@ class HtmlBuilder
             $key = $value;
         }
 
-        if (! is_null($value)) {
+        if (!is_null($value)) {
             return $key.'="'.e($value).'"';
         }
     }
@@ -390,7 +412,8 @@ class HtmlBuilder
     /**
      * Obfuscate a string to prevent spam-bots from sniffing it.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return string
      */
     public function obfuscate($value)
@@ -423,9 +446,10 @@ class HtmlBuilder
     /**
      * Generate a meta tag.
      *
-     * @param  string  $name
-     * @param  string  $content
-     * @param  array   $attributes
+     * @param string $name
+     * @param string $content
+     * @param array  $attributes
+     *
      * @return string
      */
     public function meta($name, $content, array $attributes = [])

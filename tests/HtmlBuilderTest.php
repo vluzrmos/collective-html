@@ -1,11 +1,9 @@
 <?php
 
-use Illuminate\Session\Store;
-use Mockery as m;
-use Illuminate\Http\Request;
-use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
+use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\UrlGenerator;
+use Mockery as m;
 
 //use Illuminate\Routing\RouteCollection;
 
@@ -19,7 +17,7 @@ class HtmlBuilderTest extends PHPUnit_Framework_TestCase
         $this->app = new Laravel\Lumen\Application();
 
         $this->urlGenerator = $this->app['url'];//new UrlGenerator($app);//new RouteCollection, Request::create('/foo', 'GET'));
-        $this->htmlBuilder  = new HtmlBuilder($this->urlGenerator);
+        $this->htmlBuilder = new HtmlBuilder($this->urlGenerator);
     }
 
     /**
@@ -33,8 +31,8 @@ class HtmlBuilderTest extends PHPUnit_Framework_TestCase
     public function testDl()
     {
         $list = [
-            'foo' => 'bar',
-            'bing' => 'baz'
+            'foo'  => 'bar',
+            'bing' => 'baz',
         ];
 
         $attributes = ['class' => 'example'];
@@ -63,6 +61,6 @@ class HtmlBuilderTest extends PHPUnit_Framework_TestCase
         $target = $this->urlGenerator->to('http://foo.com/bar.ico');
         $result = $this->htmlBuilder->favicon('http://foo.com/bar.ico');
 
-        $this->assertEquals('<link rel="shortcut icon" type="image/x-icon" href="'.$target.'">' . PHP_EOL, $result);
+        $this->assertEquals('<link rel="shortcut icon" type="image/x-icon" href="'.$target.'">'.PHP_EOL, $result);
     }
 }

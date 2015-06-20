@@ -26,6 +26,20 @@ And remember to enable de facades, just uncomment that line:
 $app->withFacades()
 ```
 
+If you want to automatically inject the `$html` and `$form` variables on all your Blade's View:
+
+```php
+$app->register('Collective\Html\InjectVarsServiceProvider');
+```
+
+And now you will not need the facades anymore, just that:
+
+```
+{!! $form->open() !!}
+//...
+{!! $html->asset() !!}
+```
+
 # Credits
 
 That package is just a free modification of [LaravelCollective/Html](https://github.com/LaravelCollective/html) to work with Lumen Framework.

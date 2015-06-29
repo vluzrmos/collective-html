@@ -1,5 +1,7 @@
 {
   "name": "vluzrmos/collective-html",
+  "description": "LaravelCollective Html and Form builder for Lumen.",
+  "keywords": ["Lumen", "Html", "Form", "Builder"],
   "license": "MIT",
   "authors": [
     {

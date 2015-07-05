@@ -1,4 +1,6 @@
 # Forms & HTML
+
+[![Join the chat at https://gitter.im/vluzrmos/collective-html](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vluzrmos/collective-html?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Lumen Version](https://img.shields.io/badge/Lumen-5.0%20%7C%205.1-orange.svg)](https://packagist.org/packages/vluzrmos/collective-html) 
 [![Latest Stable Version](https://poser.pugx.org/vluzrmos/collective-html/v/stable)](https://packagist.org/packages/vluzrmos/collective-html) [![Total Downloads](https://poser.pugx.org/vluzrmos/collective-html/downloads)](https://packagist.org/packages/vluzrmos/collective-html) [![Latest Unstable Version](https://poser.pugx.org/vluzrmos/collective-html/v/unstable)](https://packagist.org/packages/vluzrmos/collective-html) [![License](https://poser.pugx.org/vluzrmos/collective-html/license)](https://packagist.org/packages/vluzrmos/collective-html) [![Build Status](https://travis-ci.org/vluzrmos/collective-html.svg?branch=master)](https://travis-ci.org/vluzrmos/collective-html) 
 

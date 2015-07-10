@@ -42,7 +42,7 @@ And now you will not need the facades anymore, just that:
 {!! $html->asset() !!}
 ```
 
-# Using like replaceform for LaravelCollective/Html
+# Replacing LaravelCollective/Html
 
 If your project require some package that requires `laravelcollective/html`, you can edit your composer.json to:
 

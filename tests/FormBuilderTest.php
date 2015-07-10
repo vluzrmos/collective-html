@@ -9,26 +9,26 @@ use Mockery as m;
 class FormBuilderTest extends PHPUnit_Framework_TestCase
 {
     /**
-    * Setup the test environment.
-    */
+     * Setup the test environment.
+     */
     public function setUp()
     {
-      $app = new Application();
+        $app = new Application();
 
-      $this->urlGenerator = $app->make('url');
+        $this->urlGenerator = $app->make('url');
 
-      $this->htmlBuilder = new HtmlBuilder($this->urlGenerator);
-      $this->formBuilder = new FormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc');
+        $this->htmlBuilder = new HtmlBuilder($this->urlGenerator);
+        $this->formBuilder = new FormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc');
 
-      $this->baseUrl = $this->urlGenerator->to('http://localhost');
+        $this->baseUrl = $this->urlGenerator->to('http://localhost');
     }
 
     /**
-    * Destroy the test environment.
-    */
+     * Destroy the test environment.
+     */
     public function tearDown()
     {
-      m::close();
+        m::close();
     }
 
     public function testOpeningForm()

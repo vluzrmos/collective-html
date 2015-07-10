@@ -411,11 +411,11 @@ class FormBuilder
      * @param  array   $options
      * @return string
      */
-    public function time($name, $value = null, $options = array())
+    public function time($name, $value = null, $options = [])
     {
         return $this->input('time', $name, $value, $options);
     }
-    
+
     /**
      * Set the text area size on the attributes.
      *
@@ -1053,5 +1053,4 @@ class FormBuilder
 
         return $this;
     }
-
 }

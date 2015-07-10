@@ -8,11 +8,11 @@ use Mockery as m;
 
 class FormBuilderTest extends PHPUnit_Framework_TestCase
 {
-  /**
-   * Setup the test environment.
-   */
-  public function setUp()
-  {
+    /**
+    * Setup the test environment.
+    */
+    public function setUp()
+    {
       $app = new Application();
 
       $this->urlGenerator = $app->make('url');
@@ -21,15 +21,15 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
       $this->formBuilder = new FormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc');
 
       $this->baseUrl = $this->urlGenerator->to('http://localhost');
-  }
+    }
 
-  /**
-   * Destroy the test environment.
-   */
-  public function tearDown()
-  {
+    /**
+    * Destroy the test environment.
+    */
+    public function tearDown()
+    {
       m::close();
-  }
+    }
 
     public function testOpeningForm()
     {
@@ -180,6 +180,17 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<input name="foo" type="number">', $form1);
         $this->assertEquals('<input name="foo" type="number" value="1">', $form2);
         $this->assertEquals('<input class="span2" name="foo" type="number">', $form3);
+    }
+
+    public function testFormTime()
+    {
+        $form1 = $this->formBuilder->time('foo');
+        $form2 = $this->formBuilder->time('foo', \Carbon\Carbon::now()->format('H:i'));
+        $form3 = $this->formBuilder->time('foo', null, ['class' => 'span2']);
+
+        $this->assertEquals('<input name="foo" type="time">', $form1);
+        $this->assertEquals('<input name="foo" type="time" value="'.\Carbon\Carbon::now()->format('H:i').'">', $form2);
+        $this->assertEquals('<input class="span2" name="foo" type="time">', $form3);
     }
 
     public function testFormDate()

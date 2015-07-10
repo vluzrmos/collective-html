@@ -404,6 +404,19 @@ class FormBuilder
     }
 
     /**
+     * Create a time input field.
+     *
+     * @param  string  $name
+     * @param  string  $value
+     * @param  array   $options
+     * @return string
+     */
+    public function time($name, $value = null, $options = array())
+    {
+        return $this->input('time', $name, $value, $options);
+    }
+    
+    /**
      * Set the text area size on the attributes.
      *
      * @param array $options
@@ -1040,4 +1053,5 @@ class FormBuilder
 
         return $this;
     }
+
 }

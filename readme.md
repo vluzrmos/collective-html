@@ -42,6 +42,26 @@ And now you will not need the facades anymore, just that:
 {!! $html->asset() !!}
 ```
 
+# Using like replaceform for LaravelCollective/Html
+
+If your project require some package that requires `laravelcollective/html`, you can edit your composer.json to:
+
+for Lumen 5.1:
+
+```
+"vluzrmos/collective-html": "1.0.6 as 5.1",
+"package-vendor/package-required-name":"package-version" //that requires laravelcollective/html 5.1
+```
+
+for Lumen 5.0:
+
+```
+"vluzrmos/collective-html": "1.0.6 as 5.0",
+"package-vendor/package-required-name":"package-version" //that requires laravelcollective/html 5.0
+```
+
+> Note: use version 1.0.6 or the latest vluzrmos/collective-html version.
+
 # Credits
 
 That package is just a free modification of [LaravelCollective/Html](https://github.com/LaravelCollective/html) to work with Lumen Framework.

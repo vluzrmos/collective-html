@@ -28,6 +28,9 @@
     "mockery/mockery": "~0.9",
     "phpunit/phpunit": "~4.0"
   },
+  "replace": {
+    "laravelcollective/html": "self.version"
+  },
   "autoload": {
     "psr-4": {
       "Collective\\Html\\": "src/"

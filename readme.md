@@ -50,6 +50,15 @@ Lumen UrlGenerator doesn't support `route('route.name', $id)`, because that you 
 {!! Form::open(['route' => ['route.name', ['id' => $id ] ]]) !!}
 ```
 
+Lumen UrlGenerator do not generate correctly urls on console commands or non-browser requests, to fix that I suggest you to install my other package:
+
+```
+composer require vluzrmos/lumen-url-host
+```
+
+And add `lumenUrlHost('your-disired.domain:port');` at the top of your `bootstrap/app.php` file. 
+
+Link: [vluzrmos/lumen-url-host](https://github.com/vluzrmos/lumen-url-host).
 
 ## Replacing LaravelCollective/Html
 

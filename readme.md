@@ -49,18 +49,18 @@ If your project require some package that requires `laravelcollective/html`, you
 for Lumen 5.1:
 
 ```
-"vluzrmos/collective-html": "1.0.8 as 5.1",
+"vluzrmos/collective-html": "1.0.9 as 5.1",
 "package-vendor/package-required-name":"package-version" //that requires laravelcollective/html 5.1
 ```
 
 for Lumen 5.0:
 
 ```
-"vluzrmos/collective-html": "1.0.8 as 5.0",
+"vluzrmos/collective-html": "1.0.9 as 5.0",
 "package-vendor/package-required-name":"package-version" //that requires laravelcollective/html 5.0
 ```
 
-> Note: use version 1.0.8 or the latest vluzrmos/collective-html version.
+> Note: use version 1.0.9 or the latest vluzrmos/collective-html version.
 
 # Credits
 

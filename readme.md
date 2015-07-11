@@ -6,11 +6,11 @@
 
 Official documentation for Forms & Html for The Laravel/Lumen Framework can be found at the [LaravelCollective](http://laravelcollective.com/docs/master/html) website.
 
-# Instalation on Lumen
+## Instalation on Lumen
 
     composer require vluzrmos/collective-html
 
-# Configuration 
+## Configuration 
 
 On your `bootstrap/app.php`:
 
@@ -42,7 +42,16 @@ And now you will not need the facades anymore, just that:
 {!! $html->asset() !!}
 ```
 
-# Replacing LaravelCollective/Html
+## Known Issues
+
+Lumen UrlGenerator doesn't support `route('route.name', $id)`, because that you have to use an associative array:
+
+```
+{!! Form::open(['route' => ['route.name', ['id' => $id ] ]]) !!}
+```
+
+
+## Replacing LaravelCollective/Html
 
 If your project require some package that requires `laravelcollective/html`, you can edit your composer.json to:
 
@@ -62,7 +71,7 @@ for Lumen 5.0:
 
 > Note: use version 1.0.9 or the latest vluzrmos/collective-html version.
 
-# Credits
+## Credits
 
 That package is just a free modification of [LaravelCollective/Html](https://github.com/LaravelCollective/html) to work with Lumen Framework.
 

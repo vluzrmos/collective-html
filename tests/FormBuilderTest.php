@@ -1,57 +1,12 @@
 <?php
 
-use Collective\Html\FormBuilder;
-use Collective\Html\HtmlBuilder;
-use Laravel\Lumen\Application;
-use Laravel\Lumen\Routing\UrlGenerator;
 use Mockery as m;
 
-class FormBuilderTest extends PHPUnit_Framework_TestCase
+/**
+ * Class FormBuilderTest.
+ */
+class FormBuilderTest extends TestCase
 {
-    /** @var  Application */
-    protected $app;
-
-    /** @var  FormBuilder */
-    protected $form;
-
-    /** @var  HtmlBuilder */
-    protected $html;
-
-    /** @var  UrlGenerator */
-    protected $url;
-
-    /**
-     * Setup the test environment.
-     */
-    public function setUp()
-    {
-        /*
-         * Forcing lumen to use http://localhost:80
-         */
-        if (!isset($_SERVER['SERVER_NAME'])) {
-            $_SERVER['SERVER_NAME'] = 'localhost';
-        }
-
-        if (!isset($_SERVER['SERVER_PORT'])) {
-            $_SERVER['SERVER_PORT'] = '80';
-        }
-
-        $this->app = new Application();
-
-        $this->url = $this->app->make('url');
-
-        $this->html = new HtmlBuilder($this->url);
-        $this->form = new FormBuilder($this->html, $this->url, 'abc');
-    }
-
-    /**
-     * Destroy the test environment.
-     */
-    public function tearDown()
-    {
-        m::close();
-    }
-
     public function testOpeningForm()
     {
         $this->app->put('foo/{id}', ['as' => 'foo.edit']);

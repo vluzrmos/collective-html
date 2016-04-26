@@ -21,9 +21,26 @@ class HtmlServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerIlluminateSession();
+
         $this->registerHtmlBuilder();
 
         $this->registerFormBuilder();
+    }
+
+    /**
+     * Register the illuminate service provider if it is not registered.
+     *
+     * @return void
+     */
+    protected function registerIlluminateSession(){
+        if (!isset($this->app['session.store'])) {
+            if(!$this->app['config']->has('session.driver')) {
+                $this->app['config']->set('session.driver', 'file');
+            } 
+
+            $this->app->register(\Illuminate\Session\SessionServiceProvider::class);
+        }         
     }
 
     /**

@@ -35,6 +35,8 @@ class HtmlServiceProvider extends ServiceProvider
      */
     protected function registerIlluminateSession(){
         if (!isset($this->app['session.store'])) {
+            $this->app->configure('session');
+            
             if(!$this->app['config']->has('session.driver')) {
                 $this->app['config']->set('session.driver', 'file');
             } 
